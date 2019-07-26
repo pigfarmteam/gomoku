@@ -247,14 +247,15 @@ export default {
     },
     async quit() {
       try {
-        if (!this.isInGame) {
+        if (this.isDoingTransaction) return;
+        else if (!this.isInGame) {
           this.isDoingTransaction = false;
+          console.log(this.$router);
           this.$router.replace('/');
         }
-        if (this.isDoingTransaction) return;
         else if (this.game.result > 0 || (address0(this.game.playerX) && address0(this.game.playerO))) {
           this.isDoingTransaction = false;
-          this.$router.back();
+          this.$router.replace('/');
         }
         else if (address0(this.game.playerX) || address0(this.game.playerO)) {
           this.$Progress.start();
@@ -270,7 +271,7 @@ export default {
         }
         else {
           this.isDoingTransaction = false;
-          this.$router.back();
+          this.$router.replace('/');
         }
       }
       catch (ex) {
@@ -555,8 +556,12 @@ export default {
       }, 3000);
     },
     setUpNewGame(game) {
+      if (game.result == 3 && (address0(game.playerX) || address0(game.playerO))) {
+        this.$router.replace('/');
+        return;
+      }
       if (!this.isWaiting) {
-        this.isWaiting = address0(game.playerX) || address0(game.playerO);
+        this.isWaiting = game.result == 0 && (address0(game.playerX) || address0(game.playerO));
       }
       if (!address0(game.playerX) && !address0(game.playerO)) {
         if (this.isWaiting) {
