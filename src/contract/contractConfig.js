@@ -37,7 +37,7 @@ export default {
 
   NETWORK_ID: process.env.NODE_ENV === 'production' ? '88' : '89',
   ADDRESS: process.env.NODE_ENV === 'production' ?
-    '0xb07232de9fe6f486d604d5bad9d598b9d05139b4' :
+    '0x6a7f02167c5fd316f631931c977b28388e53bdf9' :
     '0x1e3f62e2e1be8580e0b540b3c2bd9d5a91709ef2'
 }
 

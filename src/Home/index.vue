@@ -100,6 +100,9 @@ export default {
     Modal
   },
   data() {
+    var rooms = [1, 2, 5, 10];
+    var waiting = {};
+    rooms.forEach(e => waiting[e] = 0)
     return {
       balance: 0,
       address: '',
@@ -109,16 +112,9 @@ export default {
       showWithPlayerModal: false,
       showGoToRoomModal: false,
       isJoining: false,
-      rooms: [1, 5, 10, 15, 20, 25],
+      rooms: rooms,
+      waiting: waiting,
       roomId: '',
-      waiting: {
-        '1': 0,
-        '5': 0,
-        '10': 0,
-        '15': 0,
-        '20': 0,
-        '25': 0
-      }
     }
   },
   created() {
@@ -343,12 +339,9 @@ export default {
       }
     },
     async loadWaitinggame() {
-      this.waiting[1] = await Contract.get.waitingGame(1, 0) ? 1 : 0;
-      this.waiting[5] = await Contract.get.waitingGame(5, 0) ? 1 : 0;
-      this.waiting[10] = await Contract.get.waitingGame(10, 0) ? 1 : 0;
-      this.waiting[15] = await Contract.get.waitingGame(15, 0) ? 1 : 0;
-      this.waiting[20] = await Contract.get.waitingGame(20, 0) ? 1 : 0;
-      this.waiting[25] = await Contract.get.waitingGame(25, 0) ? 1 : 0;
+      for (var i = 0; i < this.rooms.length; i++) {
+        this.waiting[this.rooms[i]] = await Contract.get.waitingGame(this.rooms[i], 0) ? 1 : 0;
+      }
     }
   }
 }

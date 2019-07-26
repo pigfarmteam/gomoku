@@ -577,7 +577,6 @@ export default {
       }
     },
     async claimFinishGame(game) {
-      return;
       if (!this.isInGame) return;
 
       try {
