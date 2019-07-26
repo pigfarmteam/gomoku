@@ -345,9 +345,9 @@ export default {
       this.waiting[1] = await Contract.get.waitingGame(1, 0) ? 1 : 0;
       this.waiting[5] = await Contract.get.waitingGame(5, 0) ? 1 : 0;
       this.waiting[10] = await Contract.get.waitingGame(10, 0) ? 1 : 0;
-      this.waiting[15] = await Contract.get.waitingGame(10, 0) ? 1 : 0;
+      this.waiting[15] = await Contract.get.waitingGame(15, 0) ? 1 : 0;
       this.waiting[20] = await Contract.get.waitingGame(20, 0) ? 1 : 0;
-      this.waiting[25] = await Contract.get.waitingGame(20, 0) ? 1 : 0;
+      this.waiting[25] = await Contract.get.waitingGame(25, 0) ? 1 : 0;
     }
   }
 }
