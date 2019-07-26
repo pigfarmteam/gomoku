@@ -38,7 +38,7 @@
         <button @click="toggleChat" class="chatbox-close-btn"><img src="./imgs/close.svg" width="15px" /></button>
       </div>
       <div style="height: 300px;">
-        <iframe v-if="full" :src="`https://anonymous-chat-group.herokuapp.com/gomoku-pigfarm-${game.playerX}-${game.playerO}#${address}|${address.slice(0, 5)}`" frameborder="0"></iframe>
+        <iframe v-if="full" :src="`https://anonymous-chat-group.herokuapp.com/gomoku-pigfarm-${[game.playerX, game.playerO].sort().join('')}#${address}|${address.slice(0, 5)}`" frameborder="0"></iframe>
         <iframe v-else :src="`https://anonymous-chat-group.herokuapp.com/gomoku-pigfarm#${address}|${address.slice(0, 5)}`" frameborder="0"></iframe>
       </div>
     </div>
@@ -247,11 +247,11 @@ export default {
     },
     async quit() {
       try {
-        if (this.isDoingTransaction) return;
         if (!this.isInGame) {
           this.isDoingTransaction = false;
-          this.$router.back();
+          this.$router.replace('/');
         }
+        if (this.isDoingTransaction) return;
         else if (this.game.result > 0 || (address0(this.game.playerX) && address0(this.game.playerO))) {
           this.isDoingTransaction = false;
           this.$router.back();
