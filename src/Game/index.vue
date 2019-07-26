@@ -32,7 +32,7 @@
       {{game.requestDraw == game.playerO ? 'Player O request Draw' : 'Player Y request Draw'}}
     </div>
 
-    <div class="chatbox animated fadeInUp faster">
+    <div v-if="showChat" v-show="showChat % 2" class="chatbox animated fadeInUp faster">
       <div class="title">
         <div>{{full ? `ChatBox` : 'ChatBox | Global' }}</div>
         <button @click="toggleChat" class="chatbox-close-btn"><img src="./imgs/close.svg" width="15px" /></button>
@@ -95,7 +95,7 @@ export default {
       isClaimingFinishGame: false,
       errMsg: '',
       showConfirmModal: false,
-      showChat: false,
+      showChat: 0,
       game: {
         board: this.emptyBoard(),
         playerX: '0x0000000000000000000000000000000000000000',
@@ -556,10 +556,10 @@ export default {
       }, 3000);
     },
     setUpNewGame(game) {
-      if (game.result == 3 && (address0(game.playerX) || address0(game.playerO))) {
-        this.$router.replace('/');
-        return;
-      }
+      // if (game.result == 3 && (address0(game.playerX) || address0(game.playerO))) {
+      //   this.$router.replace('/');
+      //   return;
+      // }
       if (!this.isWaiting) {
         this.isWaiting = game.result == 0 && (address0(game.playerX) || address0(game.playerO));
       }
@@ -669,8 +669,8 @@ export default {
   .chatbox {
     width: 100vw;
     background: #ffffff;
-    position: absolute !important;
-    bottom: -300px !important;
+    /* position: absolute !important; */
+    /* bottom: -300px !important; */
   }
   /* .game-top-container {
   } */
@@ -723,6 +723,7 @@ export default {
   font-size: 20px;
   z-index: 9999;
   position: fixed;
+  bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
 }
