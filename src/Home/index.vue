@@ -77,6 +77,7 @@
       <div class="title" @click="scrollBottom">ChatBox</div>
       <div style="height: 300px;">
         <iframe v-if="address" :src="`https://anonymous-chat-group.herokuapp.com/gomoku-pigfarm#${address}|${address.slice(0, 5)}`" frameborder="0"></iframe>
+        <iframe v-else :src="`https://anonymous-chat-group.herokuapp.com/gomoku-pigfarm`" frameborder="0"></iframe>
       </div>
     </div>
   </div>

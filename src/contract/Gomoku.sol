@@ -266,7 +266,7 @@ contract Gomoku {
         game.result = 3;
         transferDraw(players[player]);
       }
-      if (game.moveOf == game.playerX) {
+      else if (game.moveOf == game.playerX) {
         game.result = 2;
         transferO(players[player]);
       }
