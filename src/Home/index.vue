@@ -19,6 +19,13 @@
       </div>
     </div>
     <div style="margin-top: 20px; padding: 0 30px; color: #FFC107">Bet your TOMO, You will have a chance to earn x1.8</div>
+
+    <div style="margin-top: 10px;">
+      <a href="https://medium.com/@PigFarmTeam/introducing-gomoku-pigfarm-takes-you-back-to-the-classics-347c111d4210"
+        style="color: #ffffff; text-decoration: none;">
+        <span style="font-size: 22px;">👉</span>&nbsp;&nbsp;<span>READ ME:&nbsp;&nbsp;Introducing Gomoku</span>
+      </a>
+    </div>
     <div style="margin-top: 30px;">
       <!-- <button @click="openWithPlayerModal" class="btn">
         Play With Friend
