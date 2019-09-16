@@ -129,9 +129,11 @@ export default {
         });
       }
       else if (window.web3.currentProvider.isMetaMask) {
+        console.log('metamask')
         Contract.login({
           metamask: true
         }, (err, address) => {
+          console.log(err);
           this.address = address;
           this.init();
         });
