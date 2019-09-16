@@ -10,24 +10,24 @@ var admins = {
 }
 
 var rejectAddresses = {
-  '0xa23cebfe11b4b81476b3a1d1516e6da6608585aa': 'Long @ TOMO',
-  '0xad124feb060a7afd77a05215485ef7f28ce2b1ea': 'Tung @ TOMO'
+  // '0xa23cebfe11b4b81476b3a1d1516e6da6608585aa': 'Long @ TOMO',
+  // '0xad124feb060a7afd77a05215485ef7f28ce2b1ea': 'Tung @ TOMO'
 }
 
 var rejectId = {
-  '40': 1,
-  '44': 1
+  // '40': 1,
+  // '44': 1
 }
 
 var games = JSON.parse(fs.readFileSync('./games.json', 'utf8'));
 
 games = games
   .filter(e => e.result == 1 || e.result == 2)
-  .filter(e => admins[e.playerO] || admins[e.playerX])
-  .filter(e => !(admins[e.playerX] && admins[e.playerO]))
-  .filter(e => !((rejectAddresses[e.playerX] || rejectAddresses[e.playerO]) && (admins[e.playerX] || admins[e.playerO])))
-  .filter(e => admins[e.playerX] && e.result == 2 || admins[e.playerO] && e.result == 1)
-  .filter(e => !rejectId[e.index])
+  // .filter(e => admins[e.playerO] || admins[e.playerX])
+  // .filter(e => !(admins[e.playerX] && admins[e.playerO]))
+  // .filter(e => !((rejectAddresses[e.playerX] || rejectAddresses[e.playerO]) && (admins[e.playerX] || admins[e.playerO])))
+  // .filter(e => admins[e.playerX] && e.result == 2 || admins[e.playerO] && e.result == 1)
+  // .filter(e => !rejectId[e.index])
 
 console.log(games.length);
 console.log(games

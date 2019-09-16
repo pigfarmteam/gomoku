@@ -1,4 +1,4 @@
-var Contract = require('../contract');
+var Contract = require('./contract');
 var fs = require('fs');
 var games = []
 async function get(i, cb) {

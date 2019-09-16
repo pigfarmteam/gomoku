@@ -1,7 +1,7 @@
-import HDWalletProvider from 'truffle-hdwallet-provider';
-import Web3 from 'web3';
-import ContractGetFunctions from './contractGetFunctions';
-import CONTRACT_CONFIG from './contractConfig';
+var HDWalletProvider = require('truffle-hdwallet-provider');
+var Web3 = require('web3');
+var ContractGetFunctions = require('./contractGetFunctions');
+var CONTRACT_CONFIG = require('./contractConfig');
 
 var connectStatus = '';
 var Contract = null;
@@ -38,36 +38,35 @@ function loginViaMetamask(cb) {
 
   web3 = new Web3(window.web3.currentProvider);
   Contract = new web3.eth.Contract(CONTRACT_CONFIG.ABI, CONTRACT_CONFIG.ADDRESS);
-  window.ethereum.enable(() => {
-    window.web3.eth.getAccounts(function (err, accounts) {
-      if (err) {
-        return cb && cb('Have an error with Metamask')
-      }
-      else if (accounts.length === 0) {
-        return cb && cb('Unlock Metamask, please')
-      }
-      connectStatus = 'metamask';
-      address = accounts[0].toLowerCase();
-      logon();
-      cb && cb(null, address);
 
-      metamaskAccountInterval = setInterval(() => {
-        window.web3.eth.getAccounts((err, accounts) => {
-          if (address && accounts.length > 0 && accounts[0] !== address) {
-            address = accounts[0].toLowerCase()
-            window.location.reload();
-            logon();
-            cb && cb(null, address);
-          }
-        });
-      }, 1000);
+  window.web3.eth.getAccounts(function (err, accounts) {
+    if (err) {
+      return cb && cb('Have an error with Metamask')
+    }
+    else if (accounts.length === 0) {
+      return cb && cb('Unlock Metamask, please')
+    }
+    connectStatus = 'metamask';
+    address = accounts[0].toLowerCase();
+    logon();
+    cb && cb(null, address);
 
-      window.web3.version.getNetwork((err, netId) => {
-        currentNetwork = netId;
-        if (netId != CONTRACT_CONFIG.NETWORK_ID) {
-          alert('Uknown network, change network to TomoChain, please');
+    metamaskAccountInterval = setInterval(() => {
+      window.web3.eth.getAccounts((err, accounts) => {
+        if (address && accounts.length > 0 && accounts[0] !== address) {
+          address = accounts[0].toLowerCase()
+          window.location.reload();
+          logon();
+          cb && cb(null, address);
         }
       });
+    }, 1000);
+
+    window.web3.version.getNetwork((err, netId) => {
+      currentNetwork = netId;
+      if (netId != CONTRACT_CONFIG.NETWORK_ID) {
+        alert('Uknown network, change network to TomoChain, please');
+      }
     });
   });
 }
@@ -139,7 +138,7 @@ function logon() {
   ContractAlias = new alias_web3.eth.Contract(CONTRACT_CONFIG.ABI, CONTRACT_CONFIG.ADDRESS);
 }
 
-export default {
+module.exports = {
   get: ContractGetFunctions,
   login: function (data, cb) {
     if (data.address) {
